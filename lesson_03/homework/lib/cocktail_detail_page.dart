@@ -8,6 +8,12 @@ const String SF_PRO_FONT = "SF Pro";
 
 class CocktailDetailPage extends StatelessWidget {
   static const String COCKTAIL_NAME = "Арбузный мохито";
+  static List<String> instruction = List.from([
+    """В большом бокале смешайте порванные листья мяты, разрезанный на кусочки лайм и сахар. Толкушкой хорошо раздавите, чтобы лайм пустил сок.""",
+    """Добавьте мелко нарезанную кубиками мякоть арбуза и снова слегка растолките.""",
+    """Добавьте ром и лед. Перемешайте и разлейте по бокалам. Сразу подавайте."""
+  ]);
+  static int rating = 3;
 
   const CocktailDetailPage(
     this.cocktail, {
@@ -24,29 +30,29 @@ class CocktailDetailPage extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              height: 343,
+              height: 343.0,
               child: Stack(
                 fit: StackFit.expand,
                 children: [
                   Image.asset("assets/images/mohito.jpg", fit: BoxFit.fill),
                   Positioned(
                     width: MediaQuery.of(context).size.width,
-                    top: 58,
+                    top: 58.0,
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(left: 28),
+                          padding: const EdgeInsets.only(left: 28.0),
                           child: SvgPicture.asset("assets/images/back.svg",
-                              width: 16, height: 15.56, color: Colors.white),
+                              width: 16.0, height: 15.0, color: Colors.white),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(right: 19),
+                          padding: const EdgeInsets.only(right: 19.0),
                           child: SvgPicture.asset(
                               "assets/images/open_cocktail.svg",
-                              width: 18,
-                              height: 18,
+                              width: 18.0,
+                              height: 18.0,
                               color: Colors.white),
                         ),
                       ],
@@ -56,7 +62,7 @@ class CocktailDetailPage extends StatelessWidget {
               ),
             ),
             Container(
-              height: 322,
+              height: 322.0,
               decoration: BoxDecoration(color: HexColor("#1A1927")),
               child: Column(
                 children: [
@@ -65,47 +71,47 @@ class CocktailDetailPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(left: 32, top: 33),
+                        padding: const EdgeInsets.only(left: 32.0, top: 33.0),
                         child: Text(
                           COCKTAIL_NAME,
                           style: TextStyle(
                               fontFamily: SF_PRO_FONT,
                               color: Colors.white,
-                              fontSize: 20),
+                              fontSize: 20.0),
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(right: 34, top: 38),
+                        padding: const EdgeInsets.only(right: 34.0, top: 38.0),
                         child: SvgPicture.asset("assets/images/like_icon.svg",
-                            width: 20, height: 18.48, color: Colors.white),
+                            width: 20.0, height: 18.0, color: Colors.white),
                       )
                     ],
                   ),
                   Container(
                     alignment: Alignment.topLeft,
                     child: Padding(
-                      padding: const EdgeInsets.only(left: 32, top: 10),
+                      padding: const EdgeInsets.only(left: 32.0, top: 10.0),
                       child: Text(
-                        "Id:12864",
+                        "Id: ${cocktail.id}",
                         style: TextStyle(
                             fontFamily: SF_PRO_FONT,
-                            fontSize: 13,
+                            fontSize: 13.0,
                             color: HexColor("#848396")),
                       ),
                     ),
                   ),
                   SizedBox(
                     width: double.infinity,
-                    height: 20,
+                    height: 20.0,
                   ),
-                  Tag("Категория коктейля", "Cocktail"),
-                  Tag("Тип коктейля", "Алкогольный"),
-                  Tag("Тип стекла", "Хайбол"),
+                  Tag("Категория коктейля", cocktail.category.value),
+                  Tag("Тип коктейля", cocktail.cocktailType.value),
+                  Tag("Тип стекла", cocktail.glassType.value),
                 ],
               ),
             ),
             Container(
-              height: 273,
+              height: 273.0,
               width: double.infinity,
               decoration: BoxDecoration(color: Colors.black),
               child: Column(
@@ -115,13 +121,13 @@ class CocktailDetailPage extends StatelessWidget {
                     child: Text(
                       "Ингредиенты:",
                       style: TextStyle(
-                          fontSize: 16,
+                          fontSize: 16.0,
                           fontFamily: SF_PRO_FONT,
                           fontWeight: FontWeight.w500,
                           color: HexColor("#B1AFC6")),
                     ),
                   ),
-                  SizedBox(height: 24),
+                  SizedBox(height: 24.0),
                   Ingredients({
                     "Листья мяты": "4 шт",
                     "Лайм": "½ шт",
@@ -129,24 +135,129 @@ class CocktailDetailPage extends StatelessWidget {
                     "Белый ром": "60 мл",
                     "Лед": "½ стакана",
                     "Мякоть арбуза": "120 г",
-                  })
+                  }),
                 ],
               ),
             ),
+            Container(
+              height: 273.0,
+              width: double.infinity,
+              decoration: BoxDecoration(color: HexColor("#201F2C")),
+              child: Instruction(instruction),
+            ),
+            Container(
+              height: 113.0,
+              width: double.infinity,
+              decoration: BoxDecoration(color: HexColor("#1A1927")),
+              child: Footer(rating),
+            )
           ],
         ),
       ),
     );
-
-    /// TODO: Сделать верстку экрана "Карточка коктейля" по модели Cocktail cocktail
-    /// Ссылка на макет
-    /// https://www.figma.com/file/d2JJUBFu7Dg0HOV30XG7Z4/OTUS-FLUTTER.-%D0%A3%D1%80%D0%BE%D0%BA-3-%D0%94%D0%97?node-id=20%3A590
-    ///для того что бы весь контент поместился, необходимо использовать SingleChildScrollView()
-    ///
-    ///
   }
 }
 
+///Footer with rating of Cocktail
+class Footer extends StatelessWidget {
+
+  final icons;
+
+  Footer(int rating)
+      : icons = List<Widget>.generate(
+            5,
+            (index) => Container(
+                decoration: BoxDecoration(
+                    color: HexColor("#2A293A"), shape: BoxShape.circle),
+                padding: const EdgeInsets.all(8.0),
+                child: (rating > index)
+                    ? Icon(
+                        Icons.star,
+                        size: 40.0,
+                        color: Colors.white,
+                      )
+                    : Icon(
+                        Icons.star,
+                        size: 40.0,
+                        color: HexColor("#1A1927"),
+                      )));
+
+  @override
+  Widget build(BuildContext context) {
+    return Wrap(
+      direction: Axis.horizontal,
+      alignment: WrapAlignment.center,
+      crossAxisAlignment: WrapCrossAlignment.center,
+      runAlignment: WrapAlignment.center,
+      spacing: 16.0,
+      children: icons,
+    );
+  }
+}
+
+///Description of cocktail
+class Instruction extends StatelessWidget {
+  final List<String> list;
+
+  Instruction(this.list);
+
+  List<Widget> _buildRowList() {
+    List<Widget> rows = [];
+    rows.add(Padding(
+      padding: const EdgeInsets.only(left: 32.0, top: 24.0, bottom: 24.0),
+      child: Text(
+        "Инструкция для приготовления",
+        style: TextStyle(
+            fontSize: 14.0,
+            fontFamily: SF_PRO_FONT,
+            fontWeight: FontWeight.w400,
+            color: HexColor("#FFFFFF")),
+      ),
+    ));
+    for (var line in list) {
+      rows.add(
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 20.0, right: 8.0, top: 6.0),
+              child: Container(
+                height: 4.0,
+                width: 4.0,
+                decoration:
+                    BoxDecoration(color: Colors.white, shape: BoxShape.circle),
+              ),
+            ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.only(right: 26.0, bottom: 16.0),
+                child: Text(
+                  line,
+                  style: TextStyle(
+                      fontSize: 14.0,
+                      fontFamily: SF_PRO_FONT,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.white),
+                ),
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+    return rows;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: _buildRowList(),
+    );
+  }
+}
+
+///Ingredient of cocktail
 class Ingredients extends StatelessWidget {
   final Map<String, String> ingredients;
 
@@ -163,20 +274,20 @@ class Ingredients extends StatelessWidget {
       rows.add(TableRow(children: [
         TableCell(
             child: Padding(
-          padding: const EdgeInsets.only(bottom: 16, left: 32),
+          padding: const EdgeInsets.only(bottom: 16.0, left: 32.0),
           child: Text(
             key,
             style: TextStyle(
                 decoration: TextDecoration.underline,
                 fontFamily: SF_PRO_FONT,
                 color: Colors.white,
-                fontSize: 14,
+                fontSize: 14.0,
                 fontWeight: FontWeight.w400),
           ),
         )),
         TableCell(
           child: Padding(
-            padding: const EdgeInsets.only(right: 36),
+            padding: const EdgeInsets.only(right: 36.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
@@ -185,7 +296,7 @@ class Ingredients extends StatelessWidget {
                   style: TextStyle(
                       fontFamily: SF_PRO_FONT,
                       color: Colors.white,
-                      fontSize: 14,
+                      fontSize: 14.0,
                       fontWeight: FontWeight.w500),
                 ),
               ],
@@ -200,6 +311,7 @@ class Ingredients extends StatelessWidget {
   }
 }
 
+///Cocktail's category, type and type of glass
 class Tag extends StatelessWidget {
   final String category, name;
 
@@ -210,7 +322,7 @@ class Tag extends StatelessWidget {
     return Container(
       alignment: Alignment.topLeft,
       child: Padding(
-        padding: const EdgeInsets.only(left: 32),
+        padding: const EdgeInsets.only(left: 32.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -219,25 +331,25 @@ class Tag extends StatelessWidget {
               style: TextStyle(
                   fontFamily: SF_PRO_FONT,
                   color: Colors.white,
-                  fontSize: 14,
+                  fontSize: 14.0,
                   fontWeight: FontWeight.w400),
             ),
-            SizedBox(height: 8),
+            SizedBox(height: 8.0),
             ClipRRect(
-              borderRadius: BorderRadius.circular(30),
+              borderRadius: BorderRadius.circular(30.0),
               child: Container(
                 padding:
-                    EdgeInsets.only(top: 6, bottom: 6, left: 16, right: 16),
+                    EdgeInsets.only(top: 6.0, bottom: 6.0, left: 16.0, right: 16.0),
                 decoration: BoxDecoration(color: HexColor("#15151C")),
                 child: Text(name,
                     style: TextStyle(
                         fontFamily: SF_PRO_FONT,
                         color: Colors.white,
-                        fontSize: 15,
+                        fontSize: 15.0,
                         fontWeight: FontWeight.w400)),
               ),
             ),
-            SizedBox(height: 16),
+            SizedBox(height: 16.0),
           ],
         ),
       ),

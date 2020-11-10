@@ -12,6 +12,7 @@ https://medium.com/flutter-community/font-features-in-flutter-320222fc171d
 https://www.youtube.com/watch?v=eI43jkQkrvs - ClipRRect (Flutter Widget of the Week)
 https://www.youtube.com/watch?v=_lbE0wsVZSw - Table (Flutter Widget of the Week)
 https://www.youtube.com/watch?v=ktTajqbhIcY&vl=en - DataTable (Flutter Widget of the Week)
+nkedin.com/in/artem-sokovets-24a9845b/ - Dart/Flutter List Tutorial with Examples
 
 
 
